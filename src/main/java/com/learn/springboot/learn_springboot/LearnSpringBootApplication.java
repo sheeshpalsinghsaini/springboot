@@ -1,46 +1,45 @@
 package com.learn.springboot.learn_springboot;
 
-import com.learn.springboot.learn_springboot.dao.CategoryDao;
-import com.learn.springboot.learn_springboot.dao.ProductDao;
-import com.learn.springboot.learn_springboot.model.Category;
-import com.learn.springboot.learn_springboot.model.Product;
+import com.learn.springboot.learn_springboot.entities.Product;
+import com.learn.springboot.learn_springboot.services.ProductService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class LearnSpringBootApplication {
+public class LearnSpringBootApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
+	private final ProductService productService;
+
+    public LearnSpringBootApplication(ProductService productService) {
+        this.productService = productService;
+    }
+
+    public static void main(String[] args) {
 		ConfigurableApplicationContext applicationContext = SpringApplication.run(LearnSpringBootApplication.class, args);
 
 
+	}
 
-		ProductDao productDao = applicationContext.getBean(ProductDao.class);
-		CategoryDao categoryDao = applicationContext.getBean(CategoryDao.class);
-
-
-
-//		Category categoryItem = Category.builder()
-//				.id(1001)
-//				.title("mobile")
-//				.description("mobile phones")
-//				.build();
-//		categoryDao.create(categoryItem);
-
-		// product create
+	@Override
+	public void run(String... args) throws Exception {
+		System.out.println("Application Started...");
 //		Product product = Product.builder()
-//				.id(102)
-//				.title("Iphone 14")
-//				.description("Best  IPhone")
-//				.price(124000)
-//				.catId(categoryItem.getId())
+//				.title("Samsung s23 Ultra")
+//				.description("This is very good phone")
+//				.price(140000)
+//				.isLive(true)
+//				.productId(1)
 //				.build();
-//		Product product1 = productDao.create(product);
+//		Product createdProduct = productService.createProduct(product);
+//		System.out.println("Created Product: "+createdProduct);
 
-//		System.out.println(product1);
 
-		productDao.getAllWithCategory().forEach(System.out::println);
+//		productService.findAllProduct().forEach(System.out::println);
+		Product product = productService.findById(2);
+		System.out.println(product);
+
 
 	}
 

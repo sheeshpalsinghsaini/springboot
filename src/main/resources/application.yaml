@@ -5,3 +5,15 @@ spring:
     url: jdbc:mysql://localhost:3306/myDB
     username: root
     password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver # no need to configure, springboot fetch it automatic
+
+# jpa and hibernate
+  jpa:
+    show-sql: true
+#    properties.hibernate.dialect: org.hibernate.dialect.MYSQL8Dialect # no need to configure, springboot fetch it automatic.
+    hibernate:
+      ddl-auto: update # update, create, none etc. [ create, update according to this config ]
+    properties:
+      hibernate:
+        format_sql: true
+
